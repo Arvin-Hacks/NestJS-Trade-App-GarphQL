@@ -1,0 +1,8 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Query {
+  """Health check / placeholder root query for Phase 1"""
+  hello: String!
+}
