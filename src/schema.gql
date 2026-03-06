@@ -2,7 +2,31 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Order {
+  id: Int!
+  total: Float!
+  userId: Int!
+}
+
+type Product {
+  id: Int!
+  name: String!
+  price: Float!
+}
+
 type Query {
   """Health check / placeholder root query for Phase 1"""
   hello: String!
+  order(id: Int!): Order
+  orders: [Order!]!
+  product(id: Int!): Product
+  products: [Product!]!
+  user(id: Int!): User
+  users: [User!]!
+}
+
+type User {
+  email: String!
+  id: Int!
+  role: String!
 }
