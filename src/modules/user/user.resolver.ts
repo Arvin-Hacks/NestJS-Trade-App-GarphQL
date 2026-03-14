@@ -1,6 +1,6 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { OrderLoader } from '../order/order.loader';
 import { Order } from '../order/entities/order.entity';
-import { OrderService } from '../order/order.service';
 import { User } from './entities/user.entity';
 import { UserService } from './user.service';
 
@@ -8,7 +8,7 @@ import { UserService } from './user.service';
 export class UserResolver {
   constructor(
     private readonly userService: UserService,
-    private readonly orderService: OrderService,
+    private readonly orderLoader: OrderLoader,
   ) {}
 
   @Query(() => [User], { name: 'users' })
@@ -23,6 +23,6 @@ export class UserResolver {
 
   @ResolveField(() => [Order])
   orders(@Parent() user: User) {
-    return this.orderService.findByUser(user.id);
+    return this.orderLoader.load(user.id);
   }
 }

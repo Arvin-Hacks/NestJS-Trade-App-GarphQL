@@ -1,6 +1,6 @@
 # GraphQL Order API — Phased Implementation Plan
 
-**Status:** Phases 1–3 done. Phase 4 done. Use this file to continue work on later phases.
+**Status:** Phases 1–5 done. Use this file to continue work on later phases.
 
 ---
 
@@ -48,13 +48,13 @@ Use a structure that can grow without big refactors:
 | **4.2** | Order resolver: `@ResolveField` for `user` and for `products` (via OrderItems). |
 | **4.3** | Schema has `User.orders`, `Order.user`, `Order.products` (via ResolveField; no circular entity imports). |
 
-### Phase 5 — N+1 fix with DataLoader
+### Phase 5 — N+1 fix with DataLoader — Done
 
 | Step    | What |
 | ------- | ---- |
-| **5.1** | Install dataloader; create `OrderLoader` (batch by userIds). |
-| **5.2** | Register loader; in User resolver `orders` use DataLoader instead of direct service call. |
-| **5.3** | (Optional) ProductLoader for orders → products. |
+| **5.1** | Install dataloader; create `OrderLoader` in `order/order.loader.ts` (batch by userIds). |
+| **5.2** | OrderLoader request-scoped; User resolver `orders` uses `orderLoader.load(user.id)` instead of `orderService.findByUser`. |
+| **5.3** | (Optional) ProductLoader for Order.products — skipped; add later if N+1 shows up in profiling. |
 
 ### Phase 6 — Authentication (JWT)
 
