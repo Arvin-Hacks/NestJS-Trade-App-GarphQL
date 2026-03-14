@@ -1,6 +1,6 @@
 # GraphQL Order API — Phased Implementation Plan
 
-**Status:** Phases 1–6 done. Use this file to continue work on later phases.
+**Status:** Phases 1–7 done. Use this file to continue work on later phases.
 
 ---
 
@@ -64,12 +64,12 @@ Use a structure that can grow without big refactors:
 | **6.2** | JwtStrategy + GqlAuthGuard; GraphQL context includes req for Bearer token; user attached to req.user. |
 | **6.3** | Mutations: register(input), login(input) → AuthPayload { access_token, user }; @UseGuards(GqlAuthGuard) on user(id), orders, order(id). |
 
-### Phase 7 — Role-based access
+### Phase 7 — Role-based access — Done
 
 | Step    | What |
 | ------- | ---- |
 | **7.1** | RolesGuard; @Roles('ADMIN','STAFF') metadata. |
-| **7.2** | Apply to createProduct, “view all orders”; users see only their data. |
+| **7.2** | Applied: `createProduct` mutation (ADMIN/STAFF only); `orders` query (all orders) restricted to ADMIN/STAFF; `myOrders` query (current user’s orders) for any authenticated user. |
 
 ### Phase 8 — Order placement
 

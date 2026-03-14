@@ -7,12 +7,18 @@ type AuthPayload {
   user: User!
 }
 
+input CreateProductInput {
+  name: String!
+  price: Float!
+}
+
 input LoginInput {
   email: String!
   password: String!
 }
 
 type Mutation {
+  createProduct(input: CreateProductInput!): Product!
   login(input: LoginInput!): AuthPayload!
   register(input: RegisterInput!): AuthPayload!
 }
@@ -34,6 +40,7 @@ type Product {
 type Query {
   """Health check / placeholder root query for Phase 1"""
   hello: String!
+  myOrders: [Order!]!
   order(id: String!): Order
   orders: [Order!]!
   product(id: String!): Product

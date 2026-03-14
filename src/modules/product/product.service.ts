@@ -15,4 +15,10 @@ export class ProductService {
       where: { id },
     });
   }
+
+  async create(data: { name: string; price: number }): Promise<Product> {
+    return this.prisma.product.create({
+      data: { name: data.name, price: data.price },
+    });
+  }
 }

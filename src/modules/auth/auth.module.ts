@@ -6,6 +6,7 @@ import { UserModule } from '../user/user.module';
 import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';
 import { GqlAuthGuard } from './guards/gql-auth.guard';
+import { RolesGuard } from './guards/roles.guard';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
@@ -29,7 +30,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
       inject: [ConfigService],
     }),
   ],
-  providers: [AuthService, AuthResolver, JwtStrategy, GqlAuthGuard],
-  exports: [AuthService, GqlAuthGuard],
+  providers: [AuthService, AuthResolver, JwtStrategy, GqlAuthGuard, RolesGuard],
+  exports: [AuthService, GqlAuthGuard, RolesGuard],
 })
 export class AuthModule {}

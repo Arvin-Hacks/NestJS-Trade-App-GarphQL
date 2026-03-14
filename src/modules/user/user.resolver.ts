@@ -5,6 +5,8 @@ import { OrderLoader } from '../order/order.loader';
 import { Order } from '../order/entities/order.entity';
 import { User } from './entities/user.entity';
 import { UserService } from './user.service';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../auth/decorators/roles.decorator';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -13,6 +15,8 @@ export class UserResolver {
     private readonly orderLoader: OrderLoader,
   ) {}
 
+  @UseGuards(GqlAuthGuard, RolesGuard)
+  @Roles('ADMIN', 'STAFF')
   @Query(() => [User], { name: 'users' })
   users() {
     return this.userService.findAll();
